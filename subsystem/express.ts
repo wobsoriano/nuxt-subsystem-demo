@@ -4,7 +4,7 @@ const app = express()
 
 app.get('/', (req, res) => {
   res.json({
-    text: 'hello from express nitro plugin'
+    text: 'hello from express'
   })
 })
 
@@ -12,9 +12,4 @@ app.get('/:name', (req, res) => {
   res.send(`hello from express, ${req.params.name}`)
 })
 
-export default defineNitroPlugin((nitro) => {
-  nitro.h3App.stack.unshift({
-    route: '/api/express',
-    handler: fromNodeMiddleware(app)
-  })
-})
+export default fromNodeMiddleware(app)

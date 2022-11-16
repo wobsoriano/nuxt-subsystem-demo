@@ -6,7 +6,7 @@ const app = fastify({ logger: true })
 
 app.get('/', () => {
   return {
-    text: 'hello from fastify nitro plugin'
+    text: 'hello from fastify'
   }
 })
 
@@ -14,15 +14,7 @@ app.get('/:name', (req) => {
   return `hello from fastify ${req.params.name}`
 })
 
-export default defineNitroPlugin(async (nitro) => {
+export default eventHandler(async (event) => {
   await app.ready();
-
-  const handler = (req: NodeIncomingMessage, reply: NodeServerResponse) => {
-    app.server.emit('request', req, reply)
-  }
-
-  nitro.h3App.stack.unshift({
-    route: '/api/fastify',
-    handler: fromNodeMiddleware(handler)
-  })
+  app.server.emit('request', event.node.req, event.node.res)
 })
