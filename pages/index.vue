@@ -1,11 +1,9 @@
-<script setup lang="ts">
-const h3 = await useFetch('/api/h3')
-const fastify = await useFetch('/api/fastify')
-const express = await useFetch('/api/express')
-</script>
-
 <template>
   <div>
-    {{ fastify.data }}
+    <h3>Nuxt subsystem demo</h3>
+    <iframe src="/api/hello" frameborder="0"></iframe> <br />
+    <iframe src="/api/h3" frameborder="0"></iframe> <br />
+    <iframe src="/api/express" frameborder="0"></iframe> <br />
+    <iframe src="/api/fastify" frameborder="0"></iframe>
   </div>
 </template>

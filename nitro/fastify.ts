@@ -1,10 +1,13 @@
 import fastify from 'fastify'
-import { EventHandler, NodeListener, NodeServerResponse } from 'h3'
+import type { IncomingMessage as NodeIncomingMessage, ServerResponse as NodeServerResponse } from 'node:http'
+import { fromNodeMiddleware } from 'h3'
 
 const app = fastify({ logger: true })
 
 app.get('/', () => {
-  return 'hello from fastify'
+  return {
+    text: 'hello from fastify nitro plugin'
+  }
 })
 
 app.get('/:name', (req) => {
@@ -14,7 +17,7 @@ app.get('/:name', (req) => {
 export default defineNitroPlugin(async (nitro) => {
   await app.ready();
 
-  const handler = (req, reply) => {
+  const handler = (req: NodeIncomingMessage, reply: NodeServerResponse) => {
     app.server.emit('request', req, reply)
   }
 

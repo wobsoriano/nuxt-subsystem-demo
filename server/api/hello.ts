@@ -1,1 +1,1 @@
-export default eventHandler(() => 'hello from nuxt folder')
+export default eventHandler(() => ({ text: 'hello from nuxt folder /api/hello.ts' }))
