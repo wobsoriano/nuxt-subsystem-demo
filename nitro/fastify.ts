@@ -1,4 +1,5 @@
 import fastify from 'fastify'
+import { EventHandler, NodeListener, NodeServerResponse } from 'h3'
 
 const app = fastify({ logger: true })
 

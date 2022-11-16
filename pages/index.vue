@@ -1,12 +1,11 @@
 <script setup lang="ts">
-const loader = () => {
-  console.log(123)
-  return 132
-}
+const h3 = await useFetch('/api/h3')
+const fastify = await useFetch('/api/fastify')
+const express = await useFetch('/api/express')
 </script>
 
 <template>
   <div>
-    Hello
+    {{ fastify.data }}
   </div>
 </template>
