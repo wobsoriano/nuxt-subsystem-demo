@@ -1,6 +1,4 @@
 import fastify from 'fastify'
-import type { IncomingMessage as NodeIncomingMessage, ServerResponse as NodeServerResponse } from 'node:http'
-import { fromNodeMiddleware } from 'h3'
 
 const app = fastify({ logger: true })
 
@@ -11,7 +9,7 @@ app.get('/', () => {
 })
 
 app.get('/:name', (req) => {
-  return `hello from fastify ${req.params.name}`
+  return `hello from fastify ${(req.params as any).name}`
 })
 
 export default eventHandler(async (event) => {
